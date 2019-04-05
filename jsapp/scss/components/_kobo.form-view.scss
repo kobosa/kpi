@@ -1,0 +1,707 @@
+$z-form-view-fullscreen: 101;
+
+.form-view__toptabs {
+  background: white;
+  text-align: center;
+  height: 48px;
+  border-bottom: 1px solid $divider-color;
+}
+
+.form-view__sidetabs {
+  border-right: 1px solid $divider-color;
+  width: 170px;
+  height: 100%;
+  max-height: calc(100% - 48px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  float: left;
+  background: white;
+  padding-top: 20px;
+}
+
+.form-view {
+  width: 100%;
+  height: calc(100% - 48px);
+  overflow-y: auto;
+  background: #F8F8F8;
+
+  &.form-view--fullscreen {
+    position: fixed;
+    z-index: $z-form-view-fullscreen;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    // min/max sizes to override any custom @media or other .form-view styles
+    min-width: 100%;
+    max-width: 100%;
+    min-height: 100%;
+    max-height: 100%;
+  }
+}
+
+.form-view__sidetabs + .form-view,
+.form-view__sidetabs + .report-view,
+.form-view__sidetabs + .loading {
+  width: calc(100% - 170px);
+  height: calc(100% - 48px);
+  overflow: auto;
+  overflow-x: hidden;
+}
+
+.form-view__sidetabs + .loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  .loading__inner code {
+    margin: 20px auto;
+  }
+}
+
+.form-view__sidetabs + .form-view.form-view--table {
+  overflow: hidden;
+}
+
+.form-view__toptabs {
+  position: relative;
+
+  a.form-view__tab {
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 13px 30px;
+    text-transform: uppercase;
+    margin-right: 10px;
+    font-size: 15px;
+    cursor: pointer;
+    position: relative;
+    color: lighten($cool-gray, 10%);
+    font-weight: normal;
+    display: inline-block;
+
+    &.active {
+      color: $black;
+      border-bottom: 2px solid $cool-green;
+    }
+
+    &:hover {
+      color: $black;
+    }
+  }
+
+  a.form-view__link--close {
+    position: absolute;
+    right: 0px;
+    top: 5px;
+  }
+}
+
+.form-view__sidetabs {
+  a.form-view__tab {
+    background: transparent;
+    border: none;
+    padding: 6px;
+    border-left: 2px solid transparent;
+    font-size: 14px;
+    cursor: pointer;
+    position: relative;
+    color: lighten($cool-gray, 10%);
+    font-weight: normal;
+    letter-spacing: -0.01em;
+    display: block;
+
+    &.active {
+      color: $cool-green;
+      border-left: 2px solid $cool-green;
+    }
+
+    &:hover {
+      color: $cool-green;
+    }
+
+    i {
+      font-size: 36px;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+
+    span {
+      vertical-align: middle;
+    }
+  }
+}
+
+.form-view__row {
+  margin: 40px;
+  margin-right: 44px;
+
+  + .form-view__row {
+    margin-top: 0px;
+  }
+
+  &.historyHidden {
+    margin-top: -15px;
+  }
+
+  &.historyHidden .form-view__cell--history-label,
+  &.historyHidden .form-view__cell--history-table {
+    max-height: 0px;
+    overflow: hidden;
+    transition: 0.2s max-height;
+  }
+
+  &.historyExpanded .form-view__cell--history-label,
+  &.historyExpanded .form-view__cell--history-table {
+    transition: 0.2s max-height;
+    max-height: 1250px;
+  }
+
+  &.historyExpanded .form-view__cell--history-table + .form-view__cell {
+    padding-top: 20px;
+  }
+}
+
+.form-view__cell {
+  &--box {
+    @include box-shadow;
+
+    background-color: #FFF;
+  }
+
+  &--columns {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &--bordertop {
+    border-top: 1px solid $cool-lightgray;
+  }
+
+  &--padding {
+    padding: 20px;
+  }
+
+  &--label {
+    font-size: 14px;
+    color: $black;
+    font-weight: 500;
+    padding-bottom: 20px;
+
+    span {
+      display: block;
+      color: $cool-gray;
+      font-size: 12px;
+    }
+  }
+
+  &--first {
+    position: relative;
+
+    .form-view__group {
+      position: absolute;
+      right: 0px;
+      top: -12px;
+      min-width: 200px;
+      text-align: right;
+    }
+  }
+
+  &--buttons {
+    a.mdl-button {
+      text-transform: uppercase;
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+  }
+
+  &--version {
+    font-weight: 600;
+    display: inline-block;
+  }
+
+  &--undeployed {
+    display: inline-block;
+  }
+
+  &--date {
+    font-weight: normal;
+    opacity: 0.8;
+    display: inline-block;
+    margin-left: 6px;
+  }
+
+  &--translation-list {
+    ul {
+      list-style: none;
+      display: inline;
+      li {
+        display: inline;
+        &:not(:last-child)::after {
+          content: ', ';
+        }
+      }
+    }
+  }
+
+  &--thin-label {
+    color: $cool-gray;
+    opacity: 0.6;
+    font-size: 12px;
+    line-height: 18px;
+    margin-bottom: 10px;
+  }
+
+  &--centered {
+    text-align: center;
+
+    button {
+      text-transform: uppercase;
+    }
+  }
+
+  &--deployed {
+    margin-left: 10px;
+    display: inline-block;
+    padding: 6px;
+    background-color: #daf6f9;
+    border-radius: 2px;
+  }
+
+  &--warning {
+    margin: 10px 20px;
+    margin-top: 0px;
+    border-top: 15px solid #FFF;
+    padding: 10px;
+    background: #F8F8F8;
+
+    i {
+      color: #FFB775;
+      font-size: 32px;
+      margin-right: 10px;
+      vertical-align: middle;
+      display: inline-block;
+    }
+
+    span {
+      vertical-align: middle;
+      display: inline-block;
+      width: calc(100% - 48px);
+    }
+  }
+
+  &--collect-row {
+    position: relative;
+    padding: 24px;
+    padding-right: 100px;
+
+    a.collect-link {
+      display: block;
+      margin-bottom: 10px;
+      color: $black;
+      font-weight: 500;
+    }
+
+    &:hover {
+      background: #F2F2F3;
+    }
+
+    a.copy {
+      position: absolute;
+      right: 15px;
+      top: 15px;
+      padding: 0px 12px;
+      cursor: pointer;
+      display: none;
+      text-transform: uppercase;
+    }
+
+    &:hover a.copy {
+      display: block;
+    }
+
+    + .form-view__cell--collect-row {
+      border-top: 1px solid $cool-lightgray;
+    }
+
+    code {
+      display: block;
+      background: #F8F8F8;
+      padding: 10px;
+      margin-top: 15px;
+      border: 1px solid $cool-lightgray;
+      font-size: 0.9em;
+    }
+  }
+}
+
+.form-view__icon-button {
+  @extend .mdl-button, .mdl-button--icon;
+  overflow: visible;
+  padding: 0;
+}
+
+// buttons in forms
+.form-view__link {
+  font-size: 36px;
+  line-height: 18px;
+  padding: 0px 5px;
+  color: $cool-gray;
+  cursor: pointer;
+  vertical-align: middle;
+
+  &:hover {
+    color: $cool-blue;
+  }
+
+  &--disabled, &--disabled:hover {
+    color: lighten($cool-gray, 15%);
+  }
+}
+
+@keyframes recent {
+  0% {
+    background-color: #FFF;
+  }
+
+  10% {
+    background-color: lighten($cool-blue, 20%);
+  }
+
+  100% {
+    background-color: lighten($cool-blue, 40%);
+  }
+}
+
+@keyframes processing {
+  0% {
+    opacity: 1;
+  }
+
+  25% {
+    opacity: 0.6;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.form-view__group {
+  .dropzone {
+    display: inline;
+  }
+
+  &--items {
+    padding: 0px;
+    border-top: 1px solid $divider-color;
+    display: flex;
+    align-items: center;
+
+    > .form-view__label {
+      text-align: right;
+      width: 30%;
+      padding: 10px;
+      vertical-align: middle;
+
+      &--version {
+        width: 39%;
+        text-align: left;
+      }
+    }
+
+    .form-view__link {
+      opacity: 0.8;
+    }
+
+    .form-view__link--export-download {
+      opacity: 0.9;
+      font-size: 42px;
+    }
+
+    .form-view__link--export-delete {
+      opacity: 0.9;
+      vertical-align: middle;
+      color: lighten($cool-red, 10%);
+      font-size: 24px;
+
+      &:hover {
+        color: $cool-red;
+        opacity: 1;
+      }
+    }
+
+    &.recent {
+      background-color: lighten($cool-blue, 40%);
+      animation: recent 5s 1;
+    }
+
+    .animate-processing {
+      animation: processing 1.5s infinite;
+    }
+  }
+
+  &--headings {
+    font-weight: 600;
+  }
+
+  &--deployments {
+    .form-view__group--items:hover {
+      background: $hover-asset-row;
+    }
+  }
+
+  &--headings {
+    font-weight: 600;
+    border-top: none;
+
+    &:hover {
+      background: transparent;
+    }
+  }
+}
+
+.form-view--form-settings,
+.form-view--settings-sharing {
+  background: #FFF;
+  padding: 40px;
+}
+
+.form-view.form-view--form-settings {
+  .form-modal__form {
+    height: 100%;
+
+    .form-modal__item--wrapper {
+      height: calc(100% - 70px);
+      overflow: auto;
+
+      .form-view__cell--iframe {
+        height: 820px;
+      }
+    }
+  }
+}
+
+.form-view.form-view--form-settings-sharing {
+  .form-modal {
+    background: white;
+    padding: 40px;
+    height: 100%;
+    overflow: auto;
+  }
+}
+
+.form-view.form-view--form-data-downloads {
+  .form-modal__item {
+    &:last-child {
+      margin-bottom: 0px;
+    }
+
+    &--export-type,
+    &--export-format {
+      width: 48%;
+      float: left;
+    }
+
+    &--export-format {
+      margin-left: 2%;
+    }
+
+    &--export-fields-from-all-versions,
+    &--export-group-headers,
+    &--export-submit {
+      clear: both;
+    }
+  }
+
+  .form-view__cell--exports-table {
+    .form-view__label {
+      text-align: left;
+      padding: 4px 10px;
+
+      &--type {
+        width: 10%;
+        text-transform: uppercase;
+      }
+
+      &--action {
+        flex-grow: 1;
+        text-align: right;
+        line-height: 40px;
+      }
+
+      &--lang {
+        flex-shrink: 1;
+      }
+    }
+
+    .form-view__group--headings {
+      padding: 8px 0px;
+
+      .form-view__label--type {
+        text-transform: none;
+      }
+    }
+
+    @media screen and (max-width: 980px) {
+      .form-view__label--date,
+      .form-view__label--include-groups,
+      .form-view__label--multi-versioned {
+        display: none;
+      }
+    }
+  }
+}
+
+.form-view__cell--iframe {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+
+  iframe {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    padding-right: 5px;
+  }
+}
+
+.form-modal__item--downloads {
+  iframe {
+    min-width: 100%;
+    min-height: 400px;
+  }
+}
+
+.form-view__cell--collect-meta {
+  pre {
+    display: block;
+    margin: 10px 0px;
+    padding: 10px;
+    border: 1px solid $divider-color;
+    background: #F8F8F8;
+    font-size: 13px;
+    white-space: normal;
+  }
+
+  ol {
+    margin: 0;
+    padding: 0;
+    margin-left: 15px;
+    margin-bottom: 25px;
+
+    li {
+      margin-bottom: 5px;
+      padding: 5px;
+    }
+
+    i {
+      margin: 0px 6px;
+      font-size: 18px;
+      display: inline-block;
+    }
+  }
+
+  code {
+    padding: 4px;
+    border: 1px solid $divider-color;
+    background: #F8F8F8;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .form-view__cell {
+    margin-top: 25px;
+  }
+}
+
+@media screen and (max-height: 420px) {
+  .form-view__sidetabs {
+    padding-top: 0;
+
+    a.form-view__tab {
+      padding-top: 0;
+      padding-bottom: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .form-view__sidetabs {
+    width: 50px;
+    padding-top: 0px;
+
+    a.form-view__tab {
+      padding: 3px;
+      padding-left: 1px;
+      font-size: 10px;
+      line-height: 1.5em;
+      text-align: center;
+      display: block;
+      letter-spacing: -0.05em;
+
+      span {
+        display: none;
+      }
+    }
+  }
+
+  .form-view__toptabs {
+    height: 39px;
+
+    a.form-view__tab {
+      font-size: 12px;
+      padding: 8px 14px;
+    }
+
+    a.form-view__link {
+      font-size: 28px;
+    }
+  }
+
+  .form-view__sidetabs + .form-view, .form-view__sidetabs + .report-view {
+    width: calc(100% - 50px);
+    overflow-x: hidden;
+  }
+
+  .form-view {
+    height: calc(100% - 39px);
+    overflow-x: hidden;
+
+    a.form-view__link {
+      font-size: 32px;
+      padding: 0px 3px;
+    }
+  }
+
+  .form-view__row {
+    margin: 16px;
+    margin-bottom: 24px;
+  }
+
+  .form-view__cell--question-list {
+    margin-left: 20px;
+  }
+
+  .form-view--form-settings,
+  .form-view--settings-sharing {
+    padding: 20px;
+  }
+
+  .form-view__cell--warning i {
+    display: none;
+  }
+
+  .form-view__cell--date {
+    display: block;
+    margin-left: 0px;
+  }
+}

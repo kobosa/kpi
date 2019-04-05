@@ -1,0 +1,218 @@
+.asset-list-sorts {
+  padding: 0px 12px;
+  white-space: nowrap;
+  border-bottom: 1px solid transparentize($cool-gray, 0.7);
+  overflow: hidden;
+
+  > .asset-list-sorts__item {
+    opacity: 0.8;
+    font-weight: 500;
+    position: relative;
+    padding: 10px 0px;
+    padding-top: 19px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .asset-list-sorts__item--submissions {
+    text-align: right;
+    letter-spacing: -0.03em;
+  }
+}
+
+.search__summary {
+  background-color: #F0F0F0;
+  height: 50px;
+  width: 100%;
+  flex-grow: 0;
+  text-align: left;
+  padding: 15px;
+
+  > div {
+    display: inline;
+  }
+
+  div + div {
+    margin-left: 5px;
+  }
+}
+
+.list__heading {
+  display: block;
+  font-size: 18px;
+  font-weight: 500;
+  padding: 9px 0;
+  line-height: 1;
+
+  span, i {
+    vertical-align: middle;
+  }
+
+  span.parent {
+    font-weight: normal;
+    color: $cool-charcoal;
+  }
+
+  i {
+    font-size: 24px;
+  }
+}
+
+.list__subheading {
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.list__heading.is-edge + .list__subheading {
+  margin-top: 0px;
+}
+
+// regular, non-grouped list for library
+.library {
+  height: 100%;
+  overflow: hidden;
+
+  > .dropzone {
+    height: calc(100% - 58px);
+    min-height: calc(100% - 58px);
+  }
+
+  .library__type-filter {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 1;
+
+    .kobo-select {
+      display: inline-block;
+      vertical-align: middle;
+      min-width: 120px;
+      margin-left: 5px;
+    }
+  }
+}
+
+.list--regular {
+  flex-flow: column;
+  margin: 0px !important;
+  position: relative;
+  height: 100%;
+  width: 100%;
+
+  .asset-list {
+    height: calc(100% - 92px);
+    overflow-y: auto;
+    width: 100%;
+    padding-bottom: 50px; // for dropdowns (?)
+  }
+
+  .asset-list, .asset-list-sorts {
+    background-color: #FFF;
+  }
+
+  .asset-list-sorts {
+    margin-top: 5px;
+  }
+
+  .asset-row__cell--date-modified,
+  .asset-list-sorts__item--modified {
+    text-align: right;
+  }
+}
+
+// grouped list for Projects
+
+.list--grouped {
+  height: 100%;
+  overflow-y: auto;
+  padding-left: 3px;
+  padding-right: 12px;
+
+  .asset-list {
+    min-height: 100%;
+  }
+
+  .asset-items {
+    @include box-shadow;
+
+    background: #FFF;
+    position: relative;
+    overflow: visible;
+
+    &--collapsed {
+      max-height: 0px;
+      overflow: hidden;
+    }
+
+    + .asset-list__heading {
+      margin-top: 20px;
+    }
+  }
+
+  .asset-row__cell--submission-count {
+    text-align: right;
+  }
+}
+
+// fixed headings when scrolling asset list
+
+.asset-list--fixed-headings {
+  padding-top: 50px;
+
+  > .asset-items--1 {
+    .asset-list-sorts {
+      display: flex;
+      position: fixed;
+      top: 70px;
+      background: #FFF;
+      z-index: 99;
+      overflow: hidden;
+      box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.04);
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .asset-list--fixed-headings {
+    > .asset-items--1 .asset-list-sorts {
+      width: calc(100% - 22px);
+    }
+  }
+
+  .list--grouped, .list--regular {
+    padding-left: 0px;
+    padding-right: 0px;
+    width: 100%;
+  }
+
+  .list__heading, .list__subheading {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .library  .library__type-filter {
+    right: 12px;
+  }
+}
+
+@media screen and (min-width: 840px) {
+  .asset-list-sorts {
+    .asset-list-sorts__item--submissions {
+      margin: 0px -4px;
+      width: calc(8.33333% + 8px);
+    }
+  }
+}
+
+@media screen and (max-width: 839px) and (min-width: 480px) {
+  .asset-list-sorts {
+    .asset-list-sorts__item--submissions {
+      margin: 0px -4px;
+      width: calc(12.5% + 8px);
+    }
+  }
+}

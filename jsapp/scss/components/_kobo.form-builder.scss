@@ -1,0 +1,600 @@
+$s-form-builder-header: 125px;
+$z-form-builder-header: 20;
+$s-form-builder-aside: 400px;
+$z-form-builder-aside: 10;
+$t-form-builder-aside-open: 200ms;
+
+// FORM BUILDER MAIN LAYOUT
+
+.formBuilder {
+  background-color: #FFF;
+}
+
+.formBuilder-header {
+  height: $s-form-builder-header;
+}
+
+.formBuilder__contents {
+  height: calc(100% - #{$s-form-builder-header});
+  overflow: auto;
+  padding-top: 10px;
+  margin-right: 0px;
+  transition: margin $t-form-builder-aside-open;
+}
+
+@media screen and (min-width: 1400px) {
+  .page-wrapper--in-formbuilder {
+    &:before {
+      content: ' ';
+      width: 100%;
+      height: 75px;
+      background-color: #FFF;
+      position: fixed;
+      right: 0;
+      z-index: -1;
+      top: 0px;
+    }
+
+    &:after {
+      content: ' ';
+      width: 100%;
+      height: 50px;
+      position: fixed;
+      right: 0;
+      z-index: -1;
+      top: 75px;
+      background-color: #F1F1F1;
+      box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.22);
+    }
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .form-builder-aside--visible + .formBuilder,
+  .lib-nav--visible + .formBuilder {
+    .formBuilder__contents {
+      margin-right: $s-form-builder-aside;
+    }
+  }
+}
+
+.form-wrap {
+  padding: 45px 75px;
+  width: 100%;
+
+  input, textarea {
+    box-shadow: none;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .loading {
+    min-height: 200px;
+  }
+
+  .error-message {
+    width: 540px;
+    margin: 24px auto;
+    padding: 12px 20px;
+
+    p {
+      font-family: monospace;
+      white-space: pre;
+    }
+
+    &__strong {
+      border: 1px solid black;
+      padding-right: 12px;
+    }
+
+    &__link {
+      @extend .mdl-button;
+
+      margin-right: 5px;
+
+      &--raised {
+        @extend .mdl-button--colored, .mdl-button--raised;
+      }
+
+      &--help {
+        float: right;
+
+        i {
+          @extend .k-icon-help;
+        }
+      }
+    }
+  }
+}
+
+// FORM BUILDER HEADER
+
+.formBuilder-header {
+  position: relative;
+  z-index: $z-form-builder-header;
+
+  .formBuilder-header__row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+
+    &.formBuilder-header__row--primary {
+      background-color: #FFF;
+      height: 75px;
+      position: relative;
+      z-index: 2;
+      box-shadow: 0 0 3px 0 rgba($black, 0.2), 0 0 10px 0 rgba($black, 0.1);
+    }
+
+    &.formBuilder-header__row--secondary {
+      background: $cool-whitegray;
+      height: 50px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 0 3px 0 rgba($black, 0.2), 0 0 10px 0 rgba($black, 0.1);
+    }
+  }
+
+  .formBuilder-header__cell {
+    &.formBuilder-header__cell--logo {
+      background-color: $cool-green;
+      width: 75px;
+      text-align: center;
+      vertical-align: middle;
+      height: 75px;
+      cursor: pointer;
+      transition: background-color 0.2s, color 0.2s;
+
+      &:hover {
+        background-color: darken($cool-green, 10%);
+      }
+
+      i {
+        color: #FFF;
+        font-size: 48px;
+        padding-top: 14px;
+        display: inline-block;
+        vertical-align: middle;
+
+        &:before {
+          margin-right: 0px;
+        }
+      }
+    }
+
+    &.formBuilder-header__cell--name {
+      flex: 1;
+      margin-left: 20px;
+
+      label::first-letter {
+        text-transform: uppercase;
+      }
+
+      input {
+        border-radius: 0px;
+        padding-left: 0;
+      }
+    }
+
+    &.formBuilder-header__cell--translations {
+      p {
+        margin: 0 0 0 10px;
+        line-height: 15px;
+        padding-top: 10px;
+        font-size: 11px;
+
+        small {
+          display: block;
+          color: #888;
+
+          &:before {
+            content: '+ ';
+          }
+        }
+      }
+    }
+
+    &.formBuilder-header__cell--buttonsTopRight {
+      text-align: right;
+      margin: 0 10px;
+
+      button {
+        margin-left: 10px;
+      }
+    }
+
+    &.formBuilder-header__cell--close {
+      width: 45px;
+      text-align: right;
+      padding: 5px;
+      margin-left: 5px;
+    }
+
+    // second row
+    &.formBuilder-header__cell--toolsButtons {
+      margin: 0 10px;
+
+      button {
+        color: $cool-gray;
+        // for tooltip
+        overflow: visible;
+        padding: 0;
+
+        &[data-tip]::after {
+          margin-left: 30px;
+        }
+
+        &:hover, &:focus, &:focus:not(:active) {
+          background-color: transparent;
+        }
+
+        &:hover {
+          color: $black;
+        }
+
+        i {
+          font-size: 32px;
+          vertical-align: middle;
+
+          &::before {
+            vertical-align: bottom;
+          }
+        }
+      }
+    }
+
+    &.formBuilder-header__cell--spacer {
+      flex-grow: 1;
+      height: 100%;
+    }
+
+    &.formBuilder-header__cell--verticalRule {
+      width: 1px;
+      background: $cool-lightgray;
+      height: 100%;
+    }
+  }
+}
+
+.formBuilder-header__close {
+  border: none;
+  color: lighten($cool-gray, 20%);
+  cursor: pointer;
+
+  @extend .mdl-button, .mdl-button--icon;
+
+  &:hover {
+    color: $cool-gray;
+  }
+}
+
+.formBuilder-header__button {
+  @extend .mdl-button;
+
+  > i {
+    @extend .fa, .fa-fw;
+  }
+
+  &.formBuilder-header__button--create,
+  &.formBuilder-header__button--save {
+    margin-left: 10px;
+    text-transform: uppercase;
+    min-width: 85px;
+
+    @extend .mdl-button--colored, .mdl-button--raised;
+
+    > i {
+      display: none;
+    }
+  }
+
+  &.formBuilder-header__button--savepending,
+  &.formBuilder-header__button--create-pending {
+    > i {
+      @extend .k-spin, .fa-circle-o-notch;
+
+      font-size: 22px;
+      line-height: 35px;
+      display: inline-block;
+    }
+
+    > i + span {
+      display: none;
+    }
+  }
+
+  &.formBuilder-header__button--savefailed:after,
+  &.formBuilder-header__button--saveneeded:after {
+    content: '*';
+    color: white;
+  }
+
+  &.formBuilder-header__button--share {
+    min-width: 85px;
+    text-transform: uppercase;
+
+    @extend .mdl-button--raised;
+
+    background: #8595A1;
+    color: white;
+  }
+
+  &.formBuilder-header__button--panel-toggle {
+    padding: 0 10px;
+
+    &.formBuilder-header__button--active {
+      i.k-icon {
+        color: $cool-blue;
+      }
+    }
+
+    .panel-toggle-name {
+      margin-right: 10px;
+    }
+
+    i.k-icon {
+      font-size: 32px;
+      vertical-align: middle;
+    }
+  }
+
+  &[disabled] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+
+// FORM STYLE SETTINGS
+
+.form-builder-aside {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  top: $s-form-builder-header;
+  width: $s-form-builder-aside;
+  background-color: $cool-whitegray;
+  transition: right $t-form-builder-aside-open;
+  box-shadow: 0 0 3px 0 rgba($black, 0.2), 0 0 10px 0 rgba($black, 0.1);
+  z-index: $z-form-builder-aside;
+
+  &:not(.form-builder-aside--visible) {
+    right: -1 * $s-form-builder-aside - 10px;
+  }
+
+  .form-builder-aside__content {
+    padding: 30px;
+    overflow-y: auto;
+    height: 100%;
+  }
+
+  .form-builder-aside__header {
+    margin: 0;
+    font-size: 20px;
+    line-height: 28px;
+    font-weight: 700;
+
+    .k-icon {
+      font-size: 28px;
+      vertical-align: bottom;
+
+      &::before {
+        vertical-align: inherit;
+      }
+    }
+  }
+
+  .form-builder-aside__header:not(:last-child) {
+    margin-bottom: 10px;
+  }
+
+  .form-builder-aside__row:not(:first-child) {
+    margin-top: 20px;
+  }
+}
+
+// FORM META
+
+.form-builder-meta {
+  display: flex;
+  flex-direction: row;
+
+  .form-builder-meta__column {
+    flex: 1;
+    margin-right: 10px;
+
+    .checkbox:not(:last-of-type) {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.form-meta__button--metasummary {
+  background-color: #F7F7F7;
+  width: calc(100% - 80px);
+  text-align: left;
+  text-transform: uppercase;
+
+  @extend .mdl-button;
+
+  span {
+    margin: 0 5px;
+  }
+}
+
+.form-meta__button--expand {
+  background-color: #F0F0F0;
+
+  @extend .mdl-button;
+
+  > i {
+    @extend .fa, .fa-fw, .fa-cog;
+  }
+}
+
+// CASCADE MODAL CONTENTS
+
+.cascade-popup {
+  textarea {
+    margin: 15px 0px;
+    width: 100%;
+    height: 220px;
+    border: 2px solid $cool-gray;
+  }
+
+  .cascade-popup__buttonWrapper {
+    padding-top: 10px;
+    text-align: right;
+
+    button {
+      @extend .mdl-button, .mdl-button--colored, .mdl-button--raised;
+
+      min-width: 100px;
+    }
+  }
+
+  .cascade-popup__message {
+    &--warning {
+      color: #FF5469;
+    }
+
+    &--ready {
+      color: $cool-green;
+    }
+  }
+
+  .cascade-help {
+    text-align: right;
+
+    i {
+      font-size: 26px;
+      color: $cool-gray;
+    }
+  }
+}
+
+.survey-editor {
+  .ui-sortable-placeholder.lib-list__item {
+    border: 1px dashed #d9dde1;
+    visibility: visible !important;
+    min-height: 80px;
+    padding: 0px;
+  }
+}
+
+// FORM BUILDER SMALL SCREEN ADJUSTMENTS
+
+@media screen and (max-width: 767px) {
+  .formBuilder-header__cell--logo {
+    display: none;
+  }
+
+  .formBuilder-header__cell--buttonsTopRight {
+    .formBuilder-header__button--save {
+      max-width: 120px;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .formBuilder-header__button--panel-toggle {
+    .panel-toggle-name {
+      display: none;
+    }
+  }
+
+  .form-wrap {
+    padding: 30px 45px;
+  }
+
+  .form-meta {
+    margin: 16px 25px;
+    margin-right: 0px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .formBuilder-header__cell--library-toggle {
+    display: none;
+  }
+}
+
+@media screen and (pointer: coarse) {
+  .formBuilder-header__cell--library-toggle {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .formBuilder-header__cell--toolsButtons button {
+    padding: 0px;
+    border-radius: 0px;
+  }
+
+  .card--selectquestion__expansion {
+    padding-right: 5px;
+    padding-left: 25px;
+  }
+
+  .multioptions__option {
+    div.editable-wrapper {
+      width: 65%;
+    }
+
+    code {
+      width: 33%;
+      margin-left: 1%;
+      margin-right: 0px;
+
+      label {
+        font-size: 10px;
+        padding-left: 2px;
+        width: 24%;
+      }
+
+      span, .editable-container {
+        padding-right: 2px;
+        width: 64%;
+        overflow: hidden;
+      }
+    }
+  }
+
+  .form-wrap {
+    padding: 15px 30px;
+  }
+
+  .btn--addrow {
+    left: -40px;
+  }
+
+  .card__settings__content {
+    padding: 20px;
+    padding-right: 10px;
+  }
+
+  .card__settings__fields__field {
+    > label {
+      text-align: left;
+      margin-right: 1%;
+    }
+
+    .settings__input {
+      input[type="text"] {
+        border: 1px solid $cool-lightgray;
+      }
+    }
+  }
+
+  .questiontypelist__item {
+    text-align: center;
+    background: #F8F8F8;
+
+    i {
+      display: block;
+      margin: 0 auto;
+      margin-bottom: 5px;
+    }
+  }
+}

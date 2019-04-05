@@ -1,0 +1,132 @@
+$s-gray-row-button-width: 100px;
+$s-gray-row-select-width: 200px;
+$s-gray-row-width: 560px;
+$s-gray-row-spacing: 10px;
+
+.user-row {
+  display: flex;
+  min-height: 50px;
+  max-height: 50px;
+  border-bottom: 1px solid $cool-lightgray;
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  transition: all 0.5s;
+  visibility: visible;
+  opacity: 1;
+
+  &--deleted {
+    min-height: 0px;
+    max-height: 0px;
+    overflow: hidden;
+    padding: 0px;
+    opacity: 0;
+    transition: all 0.5s;
+  }
+
+  &__avatar {
+    margin-right: 12px;
+  }
+
+  &__name {
+    flex: 2;
+    line-height: 2.2em;
+  }
+
+  &__role {
+    min-width: 160px;
+    text-align: right;
+    line-height: 2.2em;
+    max-height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding-left: 15px;
+  }
+
+  &__cancel {
+    width: 24px;
+    margin-left: 6px;
+    display: inline-block;
+    font-size: 24px;
+    line-height: 1.2em;
+    cursor: pointer;
+    color: #D08B8C;
+    margin-right: -4px;
+  }
+}
+
+.sharing-form__user {
+  margin: 30px 0px;
+}
+
+// -----------------------------------------------------------------------------
+// common parts
+// -----------------------------------------------------------------------------
+
+.form-modal__item--gray-row {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  position: relative;
+  background: #F8F8F8;
+  padding: 15px;
+
+  > *:not(:first-child) {
+    margin-left: $s-gray-row-spacing;
+  }
+
+  .kobo-select {
+    min-width: $s-gray-row-select-width;
+    .kobo-select__control {
+      height: 40px;
+    }
+  }
+
+  > input[type="text"] {
+    flex: 1;
+    padding: $s-gray-row-spacing;
+    height: 40px;
+  }
+
+  button {
+    min-width: $s-gray-row-button-width;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .form-modal__item--gray-row {
+    min-width: $s-gray-row-width;
+  }
+}
+
+.form-modal__item--shareable-link {
+  margin-top: 10px;
+}
+
+// -----------------------------------------------------------------------------
+// copy team permissions parts
+// -----------------------------------------------------------------------------
+
+.form-view__cell--copy-team-permissions {
+  margin-top: 30px;
+  border-top: 1px solid $divider-color;
+  padding-top: 20px;
+
+  .form-modal__item--gray-row .kobo-select {
+    flex: 1;
+  }
+}
+
+.form-modal__item--copy-team-permissions-opener {
+  color: $cool-blue;
+  cursor: pointer;
+
+  &:hover {
+    color: lighten($cool-blue, 10%);
+  }
+
+  &:active {
+    color: lighten($cool-blue, 20%);
+  }
+}

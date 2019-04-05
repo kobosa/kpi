@@ -1,0 +1,10 @@
+Dockerfile
+node_modules
+jsapp/xlform/components
+jsapp/compiled
+jsapp/fonts
+staticfiles
+**/*.pyc
+webpack-stats.json
+locale
+
