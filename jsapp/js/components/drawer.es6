@@ -153,6 +153,18 @@ class Drawer extends Reflux.Component {
           }
         </div>
 
+        <div className='k-drawer__icons-bottom'>
+          { stores.session.currentAccount &&
+            <a href='http://167.86.106.216:8006/'
+              className='k-drawer__link'
+              target='_blank'
+              data-tip={t('KoboReports')}
+            >
+              <i className='k-icon k-icon-globe' />
+            </a>
+          }
+        
+        </div>
       </bem.Drawer>
       );
   }

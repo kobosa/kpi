@@ -135,9 +135,8 @@ CONSTANCE_CONFIG = {
                             'URL for terms of service document'),
     'PRIVACY_POLICY_URL': ('http://www.kobotoolbox.org/privacy',
                           'URL for privacy policy'),
-    'SOURCE_CODE_URL': ('https://github.com/kobotoolbox/',
-                        'URL of source code repository. When empty, a link '
-                        'will not be shown in the user interface'),
+    'SOURCE_CODE_URL': ('http://0.0.0.0:8007/',
+                        'KoboReports'),
     'SUPPORT_URL': (os.environ.get('KOBO_SUPPORT_URL',
                                    'http://help.kobotoolbox.org/'),
                     'URL of user support portal. When empty, a link will not '
