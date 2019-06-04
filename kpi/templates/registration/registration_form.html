@@ -25,7 +25,7 @@
     </a>
   </div>
   <div class="registration__first-half">
-    <h1>{% trans "Crear una cuenta 1" %}</h1>
+    <h1>{% trans "Crear una cuenta" %}</h1>
       {% csrf_token %}
       {% for field in form %}
           <div class="field {{ field.name }}">
@@ -53,8 +53,8 @@
 
   <div class="registration__second-half">
       {% if welcome_message %} {{ welcome_message|safe }} {% else %}
-      <p>NOMBRE DE LA EMPRESA :/ Esta es una descripción de la empresa</p>
-      <p>Links externos a la empresa </p>
+      <p>KOBO S.A.</p>
+      <p>https://www.sanitechecuador.com</p>
       {% endif %}
   </div>
   <div style="clear:both;"></div>
